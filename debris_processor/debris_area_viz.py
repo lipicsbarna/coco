@@ -1,14 +1,16 @@
 import streamlit as st
 import json
 import os
+import pandas as pd
 from debris_processor import calculate_debris_area
 
 INPUT_FOLDER = "/tmp/inputs"
 files = os.listdir(INPUT_FOLDER)
+files = [file for file in files if "json" in file]
 
 jsons = []
 for file in files:
-    with open(f"{INPUT_FOLDER}/file") as j:
+    with open(f"{INPUT_FOLDER}/{file}") as j:
         _coco = json.load(j)
         jsons.append(_coco)
 
@@ -25,7 +27,7 @@ not_debris_areas = [
 ]
 
 dates = [
-    f"{file.split('_')[1]}-{file.split('_')[0]}" for file in files
+    f"{file.split('.')[0].split('_')[1]}-{file.split('.')[0].split('_')[0]}" for file in files
 ]
 
 df = pd.DataFrame(areas, columns=["debris_area", "not_debris_area"])

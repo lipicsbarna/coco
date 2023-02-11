@@ -7,4 +7,6 @@ COPY ./debris_processor/* /src/
 RUN unzip /tmp/inputs.zip -d /tmp/ && \
     pip install -r /tmp/requirements.txt
 
-ENTRYPOINT [ "/bin/bash" ]
+EXPOSE 8501
+
+CMD ["streamlit", "run", "/src/debris_area_viz.py" ]
